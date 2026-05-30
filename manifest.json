@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Office Reader",
+  "version": "1.0.0",
+  "description": "阅读辅助工具",
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://read.qidian.com/*",
+        "*://vipreader.qidian.com/*",
+        "*://fanqienovel.com/*",
+        "*://www.biquge.com.cn/*",
+        "*://www.biquge5200.com/*",
+        "*://www.xbiquge.so/*",
+        "*://www.xbiquge.bz/*",
+        "*://www.jjwxc.net/*",
+        "*://www.17k.com/*",
+        "*://www.zongheng.com/*",
+        "*://book.zongheng.com/*",
+        "*://www.ciweimao.com/*",
+        "*://www.shuqi.com/*",
+        "*://www.txtwu.com/*",
+        "*://www.69shu.com/*",
+        "*://www.52bqg.org/*",
+        "*://www.biqugeu.net/*",
+        "*://www.hetushu.com/*"
+      ],
+      "js": ["scripts/site-rules.js", "scripts/extractor.js", "scripts/disguise.js", "scripts/main.js"],
+      "css": ["styles/word-skin.css", "styles/excel-skin.css", "styles/common.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

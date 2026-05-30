@@ -1,0 +1,299 @@
+.nd-skin-excel {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f0f0f0 !important;
+}
+
+.nd-excel-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+  background: #217346;
+  color: #fff;
+  padding: 0 8px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.nd-excel-titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nd-excel-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.nd-excel-filename {
+  font-size: 12px;
+  opacity: 0.95;
+}
+
+.nd-excel-titlebar-buttons {
+  display: flex;
+  gap: 0;
+}
+
+.nd-excel-titlebar-buttons span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 32px;
+  font-size: 12px;
+  cursor: default;
+}
+
+.nd-excel-titlebar-buttons span:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.nd-excel-titlebar-buttons .nd-btn-close:hover {
+  background: #e81123;
+}
+
+.nd-excel-ribbon {
+  background: #fff;
+  border-bottom: 1px solid #d0d0d0;
+  flex-shrink: 0;
+}
+
+.nd-excel-tabs {
+  display: flex;
+  padding: 4px 12px 0;
+  gap: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.nd-excel-tabs .nd-tab {
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: default;
+  border-bottom: 2px solid transparent;
+  color: #444;
+}
+
+.nd-excel-tabs .nd-tab-active {
+  border-bottom-color: #217346;
+  color: #217346;
+}
+
+.nd-excel-tabs .nd-tab:hover {
+  background: #f4f4f4;
+}
+
+.nd-excel-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  gap: 4px;
+  min-height: 44px;
+}
+
+.nd-excel-formulabar {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  background: #fff;
+  border-bottom: 1px solid #d0d0d0;
+  padding: 0 4px;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.nd-excel-namebox {
+  width: 60px;
+  height: 22px;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background: #fff;
+}
+
+.nd-excel-fx {
+  font-size: 12px;
+  font-style: italic;
+  color: #666;
+  padding: 0 6px;
+  border-left: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  height: 22px;
+  display: flex;
+  align-items: center;
+}
+
+.nd-excel-formula-input {
+  flex: 1;
+  height: 22px;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  padding: 0 6px;
+  background: #fff;
+}
+
+.nd-excel-body {
+  flex: 1;
+  overflow: auto !important;
+  background: #fff;
+}
+
+.nd-excel-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.nd-excel-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f0f0f0;
+}
+
+.nd-excel-colhead {
+  height: 22px;
+  background: #f0f0f0;
+  border: 1px solid #d0d0d0;
+  font-weight: normal;
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+  min-width: 80px;
+}
+
+.nd-excel-colhead:first-child {
+  width: 40px;
+  min-width: 40px;
+}
+
+.nd-excel-rownum {
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
+  background: #f0f0f0;
+  border: 1px solid #d0d0d0;
+  text-align: center;
+  font-size: 11px;
+  color: #555;
+  padding: 2px !important;
+}
+
+.nd-excel-cell {
+  height: 22px;
+  border: 1px solid #e0e0e0;
+  padding: 2px 6px !important;
+  font-size: 12px;
+  color: #333;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nd-excel-cell-a {
+  width: auto;
+  min-width: 300px;
+  white-space: normal !important;
+  line-height: 1.6;
+  padding: 4px 8px !important;
+}
+
+.nd-excel-cell-b,
+.nd-excel-cell-c,
+.nd-excel-cell-d,
+.nd-excel-cell-e,
+.nd-excel-cell-f {
+  width: 80px;
+  min-width: 80px;
+}
+
+.nd-excel-cell-header {
+  font-weight: bold;
+  background: #f8f8f8;
+}
+
+.nd-excel-row:hover .nd-excel-cell {
+  background: #e8f4fd;
+}
+
+.nd-excel-sheetbar {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  background: #f0f0f0;
+  border-top: 1px solid #d0d0d0;
+  padding: 0 8px;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.nd-sheet-nav {
+  font-size: 10px;
+  cursor: default;
+  padding: 2px 6px;
+  color: #666;
+}
+
+.nd-sheet-tab {
+  padding: 4px 12px;
+  font-size: 11px;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-bottom: none;
+  cursor: default;
+  color: #333;
+}
+
+.nd-sheet-active {
+  background: #fff;
+  border-bottom: 2px solid #fff;
+  font-weight: 500;
+}
+
+.nd-sheet-add {
+  font-size: 14px;
+  cursor: default;
+  padding: 0 8px;
+  color: #666;
+}
+
+.nd-excel-statusbar {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  background: #217346;
+  color: #fff;
+  padding: 0 12px;
+  font-size: 11px;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.nd-excel-statusbar .nd-statusbar-right {
+  color: rgba(255,255,255,0.9);
+}
+
+@media (max-width: 900px) {
+  .nd-excel-cell-d,
+  .nd-excel-cell-e,
+  .nd-excel-cell-f {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .nd-excel-cell-b,
+  .nd-excel-cell-c {
+    display: none;
+  }
+  .nd-excel-toolbar {
+    overflow-x: auto;
+  }
+}

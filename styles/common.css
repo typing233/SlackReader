@@ -1,0 +1,83 @@
+#nd-disguise-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 2147483647 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+  background: #f0f0f0 !important;
+  box-sizing: border-box !important;
+}
+
+#nd-disguise-container * {
+  box-sizing: border-box !important;
+  margin: 0;
+  padding: 0;
+}
+
+#nd-disguise-container select {
+  border: 1px solid #d0d0d0;
+  background: #fff;
+  padding: 2px 4px;
+  font-size: 12px;
+  border-radius: 2px;
+  cursor: default;
+}
+
+.nd-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  cursor: default;
+  font-size: 13px;
+}
+
+.nd-toolbar-btn:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+.nd-toolbar-separator {
+  width: 1px;
+  height: 28px;
+  background: #d0d0d0;
+  margin: 0 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.nd-toolbar-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  vertical-align: middle;
+}
+
+.nd-font-select {
+  width: 100px;
+}
+
+.nd-size-select {
+  width: 50px;
+}
+
+.nd-statusbar-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nd-zoom-slider {
+  width: 80px;
+  height: 4px;
+  cursor: default;
+}
