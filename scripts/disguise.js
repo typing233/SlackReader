@@ -5,34 +5,45 @@ class DisguiseManager {
     this.originalTitle = document.title;
     this.originalContent = null;
     this.container = null;
+    this.fakeTitle = null;
     this.fakeTitles = {
       word: [
         '2025年度工作汇报.docx',
         '第四季度总结报告.docx',
         '项目可行性分析.docx',
         '会议纪要-20250528.docx',
-        '部门绩效考核方案.docx'
+        '部门绩效考核方案.docx',
+        '产品需求文档V3.2.docx',
+        '周报-第22周.docx'
       ],
       excel: [
         '数据汇总表.xlsx',
         '2025年Q4销售数据.xlsx',
         '预算明细表-终版.xlsx',
         '人员考勤统计表.xlsx',
-        '项目进度跟踪表.xlsx'
+        '项目进度跟踪表.xlsx',
+        'KPI指标统计-5月.xlsx',
+        '客户信息台账.xlsx'
       ]
     };
   }
 
-  activate(skin, content, chapterTitle) {
+  activate(skin, content) {
     if (this.isActive && this.currentSkin === skin) {
       this.deactivate();
       return;
     }
 
+    if (!this.isActive) {
+      this.originalContent = document.body.innerHTML;
+      this.originalTitle = document.title;
+    }
+
     this.currentSkin = skin;
     this.isActive = true;
-    this.originalContent = document.body.innerHTML;
+    this.fakeTitle = this.getRandomTitle(skin);
 
+    document.title = this.fakeTitle;
     document.body.innerHTML = '';
     document.body.className = '';
 
@@ -41,11 +52,9 @@ class DisguiseManager {
     this.container.className = `nd-skin-${skin}`;
 
     if (skin === 'word') {
-      this.container.innerHTML = this.buildWordUI(content, chapterTitle);
-      document.title = this.getRandomTitle('word');
+      this.container.innerHTML = this.buildWordUI(content);
     } else {
-      this.container.innerHTML = this.buildExcelUI(content, chapterTitle);
-      document.title = this.getRandomTitle('excel');
+      this.container.innerHTML = this.buildExcelUI(content);
     }
 
     document.body.appendChild(this.container);
@@ -56,15 +65,10 @@ class DisguiseManager {
     if (!this.isActive) return;
     this.isActive = false;
     this.currentSkin = null;
+    this.fakeTitle = null;
     document.title = this.originalTitle;
     if (this.originalContent) {
       document.body.innerHTML = this.originalContent;
-    }
-  }
-
-  toggle() {
-    if (this.isActive) {
-      this.deactivate();
     }
   }
 
@@ -73,17 +77,20 @@ class DisguiseManager {
     return titles[Math.floor(Math.random() * titles.length)];
   }
 
-  buildWordUI(content, chapterTitle) {
+  buildWordUI(content) {
     const paragraphs = content.split('\n\n').filter(p => p.trim());
     const wordContent = paragraphs.map(p =>
       `<p class="nd-word-paragraph">${this.escapeHtml(p.trim())}</p>`
     ).join('');
 
+    const charCount = content.replace(/\s/g, '').length;
+    const pageCount = Math.max(1, Math.ceil(charCount / 1500));
+
     return `
       <div class="nd-word-titlebar">
         <div class="nd-word-titlebar-left">
           <img class="nd-word-icon" src="data:image/svg+xml,${encodeURIComponent(this.getWordIconSVG())}" alt="">
-          <span class="nd-word-filename">${document.title}</span>
+          <span class="nd-word-filename">${this.escapeHtml(this.fakeTitle)} - Word</span>
         </div>
         <div class="nd-word-titlebar-buttons">
           <span class="nd-btn-minimize">─</span>
@@ -129,13 +136,12 @@ class DisguiseManager {
       </div>
       <div class="nd-word-body">
         <div class="nd-word-page">
-          <h1 class="nd-word-title">${this.escapeHtml(chapterTitle || '')}</h1>
           ${wordContent}
         </div>
       </div>
       <div class="nd-word-statusbar">
-        <span>第 1 页，共 1 页</span>
-        <span>字数：${content.replace(/\s/g, '').length}</span>
+        <span>第 1 页，共 ${pageCount} 页</span>
+        <span>字数：${charCount}</span>
         <span class="nd-statusbar-right">
           <span class="nd-view-btn">☐</span>
           <span class="nd-view-btn">☐</span>
@@ -147,10 +153,10 @@ class DisguiseManager {
     `;
   }
 
-  buildExcelUI(content, chapterTitle) {
+  buildExcelUI(content) {
     const lines = content.split('\n').filter(l => l.trim());
     const rows = lines.map((line, i) => {
-      const rowNum = i + 2;
+      const rowNum = i + 1;
       const displayText = line.trim();
       return `<tr class="nd-excel-row">
         <td class="nd-excel-rownum">${rowNum}</td>
@@ -167,7 +173,7 @@ class DisguiseManager {
       <div class="nd-excel-titlebar">
         <div class="nd-excel-titlebar-left">
           <img class="nd-excel-icon" src="data:image/svg+xml,${encodeURIComponent(this.getExcelIconSVG())}" alt="">
-          <span class="nd-excel-filename">${document.title}</span>
+          <span class="nd-excel-filename">${this.escapeHtml(this.fakeTitle)} - Excel</span>
         </div>
         <div class="nd-excel-titlebar-buttons">
           <span class="nd-btn-minimize">─</span>
@@ -211,7 +217,7 @@ class DisguiseManager {
       <div class="nd-excel-formulabar">
         <span class="nd-excel-namebox">A1</span>
         <span class="nd-excel-fx">fx</span>
-        <input class="nd-excel-formula-input" value="${this.escapeHtml(chapterTitle || '')}" readonly>
+        <input class="nd-excel-formula-input" value="" readonly>
       </div>
       <div class="nd-excel-body">
         <table class="nd-excel-table">
@@ -227,15 +233,6 @@ class DisguiseManager {
             </tr>
           </thead>
           <tbody>
-            <tr class="nd-excel-row">
-              <td class="nd-excel-rownum">1</td>
-              <td class="nd-excel-cell nd-excel-cell-a nd-excel-cell-header">${this.escapeHtml(chapterTitle || '内容')}</td>
-              <td class="nd-excel-cell nd-excel-cell-b"></td>
-              <td class="nd-excel-cell nd-excel-cell-c"></td>
-              <td class="nd-excel-cell nd-excel-cell-d"></td>
-              <td class="nd-excel-cell nd-excel-cell-e"></td>
-              <td class="nd-excel-cell nd-excel-cell-f"></td>
-            </tr>
             ${rows}
           </tbody>
         </table>

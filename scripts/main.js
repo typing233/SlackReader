@@ -8,13 +8,11 @@
   const disguise = new DisguiseManager();
 
   let extractedContent = null;
-  let chapterTitle = null;
 
   function doExtract() {
     const result = extractor.extract();
     if (result) {
       extractedContent = result.content;
-      chapterTitle = result.title;
     }
   }
 
@@ -30,7 +28,7 @@
         if (extractedContent) {
           chrome.storage.local.get(['preferredSkin'], (result) => {
             const skin = result.preferredSkin || 'word';
-            disguise.activate(skin, extractedContent, chapterTitle);
+            disguise.activate(skin, extractedContent);
           });
         }
       }
@@ -43,7 +41,7 @@
     if (msg.action === 'activate') {
       if (!extractedContent) doExtract();
       if (extractedContent) {
-        disguise.activate(msg.skin, extractedContent, chapterTitle);
+        disguise.activate(msg.skin, extractedContent);
         sendResponse({ success: true });
       } else {
         sendResponse({ success: false, error: '无法提取正文内容' });
