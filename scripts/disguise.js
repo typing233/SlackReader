@@ -1,9 +1,9 @@
 class DisguiseManager {
-  constructor() {
+  constructor(pristineHTML, pristineTitle) {
+    this.pristineHTML = pristineHTML;
+    this.pristineTitle = pristineTitle;
     this.currentSkin = null;
     this.isActive = false;
-    this.originalTitle = document.title;
-    this.originalContent = null;
     this.container = null;
     this.fakeTitle = null;
     this.fakeTitles = {
@@ -29,16 +29,6 @@ class DisguiseManager {
   }
 
   activate(skin, content) {
-    if (this.isActive && this.currentSkin === skin) {
-      this.deactivate();
-      return;
-    }
-
-    if (!this.isActive) {
-      this.originalContent = document.body.innerHTML;
-      this.originalTitle = document.title;
-    }
-
     this.currentSkin = skin;
     this.isActive = true;
     this.fakeTitle = this.getRandomTitle(skin);
@@ -66,10 +56,8 @@ class DisguiseManager {
     this.isActive = false;
     this.currentSkin = null;
     this.fakeTitle = null;
-    document.title = this.originalTitle;
-    if (this.originalContent) {
-      document.body.innerHTML = this.originalContent;
-    }
+    document.title = this.pristineTitle;
+    document.body.innerHTML = this.pristineHTML;
   }
 
   getRandomTitle(type) {

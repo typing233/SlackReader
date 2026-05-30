@@ -4,8 +4,11 @@
   const rule = getSiteRule();
   if (!rule) return;
 
+  const pristineHTML = document.body.innerHTML;
+  const pristineTitle = document.title;
+
   const extractor = new ContentExtractor(rule);
-  const disguise = new DisguiseManager();
+  const disguise = new DisguiseManager(pristineHTML, pristineTitle);
 
   let extractedContent = null;
 
